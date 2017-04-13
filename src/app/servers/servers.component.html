@@ -6,14 +6,16 @@
 <input
     type="text"
     class="form-control"
-    [(ngModel)]="serverName"/>
-<p>{{serverName}}</p>
+    placeholder="Enter server name"
+    [(ngModel)]="serverName"
+    (input)="onInputChange($event)"/>
+<p></p>
 <button 
     class="btn btn-primary"
-    [disabled]="allowNewServer"
+    [disabled]="!allowNewServer"
     (click)="onCreateServer($event)">
-        Add Server (Allowed?: {{!allowNewServer}})
+        Add Server
 </button>
-<p>{{ serverCreationStatus }}</p>
+<p>{{serverCreationStatus}}</p>
 <app-server></app-server>
 <app-server></app-server>
