@@ -1,14 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+enum ServerStatus{
+  ONLINE,
+  OFFLINE
+}
 
 @Component({
-    selector: 'app-server',
-    templateUrl: './server.component.html'
+  selector: 'app-server',
+  templateUrl: './server.component.html'
 })
-export class ServerComponent {
-    serverId: number = 10;
-    serverStatus: string = 'offline';
+export class ServerComponent implements OnInit {
+  private MIN: number = 0;
+  private MAX: number = 99999;
+  private STATUS = {
+    0: 'ONLINE',
+    1: 'OFFLINE'
+  }
+  serverId: number = 10;
+  serverStatus: ServerStatus = ServerStatus.OFFLINE;
 
-    getServerStatus(): string {
-        return this.serverStatus;
-    }
+  constructor() {
+    this.serverId = Math.floor(Math.random() * (this.MAX - this.MIN)) + this.MIN;
+    this.serverStatus = this.serverId % 2 === 0 ? ServerStatus.ONLINE : ServerStatus.OFFLINE;
+  }
+
+  ngOnInit(): void {
+      
+  }
+
+  getServerStatus(): string {
+      return this.STATUS[this.serverStatus];
+  }
+
+  getColor(): string {
+    return this.serverStatus === ServerStatus.ONLINE ? 'lightgreen' : 'salmon';
+  } 
 }
