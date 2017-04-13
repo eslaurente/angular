@@ -24,6 +24,6 @@
             Clear
     </button>
 </div>
-<p>{{serverCreationStatus}}</p>
+<p *ngIf="serverCreated && serverName">{{serverCreationStatus}}</p>
 <app-server></app-server>
 <app-server></app-server>
