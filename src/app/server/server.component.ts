@@ -7,7 +7,15 @@ enum ServerStatus{
 
 @Component({
   selector: 'app-server',
-  templateUrl: './server.component.html'
+  templateUrl: './server.component.html',
+  styles: [`
+    .online {
+      color: green;
+    }
+    .offline {
+      color: maroon;
+    }
+  `]
 })
 export class ServerComponent implements OnInit {
   private MIN: number = 0;
@@ -33,6 +41,10 @@ export class ServerComponent implements OnInit {
   }
 
   getColor(): string {
-    return this.serverStatus === ServerStatus.ONLINE ? 'lightgreen' : 'salmon';
-  } 
+    return this.isOnline() ? 'lightgreen' : 'salmon';
+  }
+
+  isOnline(): boolean {
+    return this.serverStatus === ServerStatus.ONLINE;
+  }
 }
