@@ -1,5 +1,10 @@
 <!--USING INLINE TEMPLATES INSTEAD-->
-<button type="button" class="btn btn-primary" [disabled]="allowNewServer">Add Server (Allowed?: {{!allowNewServer}})</button>
-<p></p>
+<button 
+    class="btn btn-primary"
+    [disabled]="allowNewServer"
+    (click)="onCreateServer()">
+        Add Server (Allowed?: {{!allowNewServer}})
+</button>
+<p>{{ serverCreationStatus }}</p>
 <app-server></app-server>
 <app-server></app-server>
