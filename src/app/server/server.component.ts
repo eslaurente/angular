@@ -27,6 +27,7 @@ export class ServerComponent implements OnInit {
   serverId: number = 10;
   serverStatus: ServerStatus = ServerStatus.OFFLINE;
 
+
   constructor() {
     this.serverId = Math.floor(Math.random() * (this.MAX - this.MIN)) + this.MIN;
     this.serverStatus = this.serverId % 2 === 0 ? ServerStatus.ONLINE : ServerStatus.OFFLINE;
