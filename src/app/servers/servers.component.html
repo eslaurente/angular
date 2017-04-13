@@ -10,12 +10,20 @@
     [(ngModel)]="serverName"
     (input)="onInputChange($event)"/>
 <p></p>
-<button 
-    class="btn btn-primary"
-    [disabled]="!allowNewServer"
-    (click)="onCreateServer($event)">
-        Add Server
-</button>
+<div class="form-group">
+    <button 
+        class="btn btn-primary"
+        [disabled]="!allowNewServer"
+        (click)="onCreateServer($event)">
+            Add Server
+    </button>
+    <button
+        class="btn btn-primary"
+        [disabled]="!serverName"
+        (click)="onClear($event)">
+            Clear
+    </button>
+</div>
 <p>{{serverCreationStatus}}</p>
 <app-server></app-server>
 <app-server></app-server>
