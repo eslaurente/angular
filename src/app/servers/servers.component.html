@@ -1,8 +1,13 @@
-<!--USING INLINE TEMPLATES INSTEAD-->
+<label>Server Name</label>
+<input
+    type="text"
+    class="form-control"
+    (input)="onUpdateServerName($event)" />
+<p>{{serverName}}</p>
 <button 
     class="btn btn-primary"
     [disabled]="allowNewServer"
-    (click)="onCreateServer()">
+    (click)="onCreateServer($event)">
         Add Server (Allowed?: {{!allowNewServer}})
 </button>
 <p>{{ serverCreationStatus }}</p>
