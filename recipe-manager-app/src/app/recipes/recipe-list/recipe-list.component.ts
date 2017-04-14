@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from "app/recipes/recipe-list/recipe.model";
+import { Recipe } from "app/shared/recipe.model";
 
 @Component({
   selector: 'app-recipe-list',
