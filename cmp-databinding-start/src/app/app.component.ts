@@ -12,4 +12,8 @@ export class AppComponent {
     new ServerElement(ElementType[ElementType.SERVER], 'Test Server', 'This is just a test')
   ];
   
+
+  onServerElementAdded(data: ServerElement) {
+    this.serverElements.push(data);
+  }
 }
