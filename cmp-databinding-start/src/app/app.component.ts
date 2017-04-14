@@ -8,8 +8,10 @@ import { ElementType } from "app/shared/element-type";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  ElementType = ElementType;
+
   serverElements: [ServerElement] = [
-    new ServerElement(ElementType[ElementType.SERVER], 'Test Server', 'This is just a test')
+    new ServerElement(ElementType.SERVER, 'Test Server', 'This is just a test')
   ];
   
 

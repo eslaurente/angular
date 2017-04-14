@@ -11,7 +11,6 @@ export class CockpitComponent implements OnInit {
   @Output() serverElementCreated = new EventEmitter<ServerElement>();
   @ViewChild('nameInput') nameInput: ElementRef;
   @ViewChild('contentInput') contentInput: ElementRef;
-  blueprintCreated;
   newServerName = '';
   newServerContent = '';
 
@@ -31,6 +30,6 @@ export class CockpitComponent implements OnInit {
   private addServerElement(elementType: ElementType) {
     this.newServerName = this.nameInput.nativeElement.value;
     this.newServerContent = this.contentInput.nativeElement.value;
-    this.serverElementCreated.emit(new ServerElement(ElementType[elementType], this.newServerName, this.newServerContent));
+    this.serverElementCreated.emit(new ServerElement(elementType, this.newServerName, this.newServerContent));
   }
 }
