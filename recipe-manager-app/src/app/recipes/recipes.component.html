@@ -1,6 +1,6 @@
 <div class="col-md-5">
-  <app-recipe-list></app-recipe-list>
+  <app-recipe-list (recipeSelect)="onRecipeSelected($event)" [recipes]="recipes"></app-recipe-list>
 </div>
 <div class="col-md-7">
-  <app-recipe-detail></app-recipe-detail>
+  <app-recipe-detail [recipe]="currentRecipe"></app-recipe-detail>
 </div>

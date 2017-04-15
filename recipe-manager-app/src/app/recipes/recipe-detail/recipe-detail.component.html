@@ -6,7 +6,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <h3>Recipe Name</h3>
+    <h3>{{ recipe.name }}</h3>
   </div>
 </div>
 <div class="row">
@@ -25,11 +25,35 @@
     </div>
   </div>
 </div>
+<br>
 <div class="row">
-  <div class="col-xs-12">Description</div>
+  <div class="col-xs-12">{{ recipe.description }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-5">
+    <h5><strong>Ingredients</strong></h5>
+    <ul>
+      <li *ngFor="let ingredient of recipe.details.ingredients">
+        {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-xs-7">
+    <span class="pull-right">
+      <img
+        [src]="recipe.imagePath"
+        [alt]="recipe.name"
+        class="img-responsive">
+    </span>
+  </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    Ingredients
+    <h5><strong>Instructions</strong></h5>
+    <ol>
+      <li *ngFor="let instruction of recipe.details.instructions">
+        {{ instruction }}
+      </li>
+    </ol>
   </div>
 </div>
