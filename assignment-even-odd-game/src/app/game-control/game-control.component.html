@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-xs-5">
+        <strong>GAME CONTROL</strong>
+      </div>
+      <div class="btn-group col-xs-6">
+        <button type="button" class="btn btn-success" (click)="onStart()">Start</button>
+        <button type="button" class="btn btn-danger" (click)="onPause()">Pause</button>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <ng-content></ng-content>
+  </div>
+</div>
