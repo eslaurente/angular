@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Recipe Manager App';
+  currentPage: string = 'recipes';
+
+  onPageSelected(pageSelected: string) {
+    this.currentPage = pageSelected;
+  }
 }
