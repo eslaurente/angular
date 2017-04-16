@@ -11,7 +11,7 @@
           <li
             class="list-group-item"
             *ngFor="let element of filterEvens()"
-            appBetterHighlight>
+            appBetterHighlight [defaultColor]="'lavenderblush'" [highlightColor]="'salmon'">
             {{ element }}
           </li>
         </div>
@@ -19,13 +19,13 @@
           <li
             class="list-group-item"
             *ngFor="let element of filterOdds()"
-            appBetterHighlight>
+            appBetterHighlight [defaultColor]="'lavenderblush'" [highlightColor]="'salmon'">
             {{ element }}
           </li>
         </div>
       </ul>
       <p appBasicHighlight>Style me with basic directive</p>
-      <p appBetterHighlight>Style me with a better directive</p>
+      <p appBetterHighlight [defaultColor]="'lavenderblush'" [highlightColor]="'salmon'">Style me with a better directive</p>
     </div>
   </div>
 </div>
