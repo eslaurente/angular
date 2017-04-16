@@ -6,6 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  numbers = [1, 2, 3, 4, 5];
+  numberList = [];
   onlyOdd = false;
+
+  constructor() {
+    for (let i = 0; i < 25; i++) {
+      this.numberList.push(Math.floor(Math.random() * (9999999 - 0)) + 0);
+    }
+  }
+
+  filterOdds(): number[] {
+    return this.numberList.filter((item) => item % 2 !== 0);
+  }
+
+  filterEvens(): number[] {
+    return this.numberList.filter((item) => item % 2 === 0);
+  }
 }

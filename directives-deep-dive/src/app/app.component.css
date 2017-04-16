@@ -1,3 +1,11 @@
 .container {
   margin-top: 30px;
 }
+
+.odd {
+  color: red;
+}
+
+.odd li {
+  background-color: lightgoldenrodyellow;
+}
