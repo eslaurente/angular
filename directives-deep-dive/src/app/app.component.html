@@ -10,14 +10,16 @@
         <div *ngIf="!onlyOdd">
           <li
             class="list-group-item"
-            *ngFor="let element of filterEvens()">
+            *ngFor="let element of filterEvens()"
+            appBetterHighlight>
             {{ element }}
           </li>
         </div>
         <div *ngIf="onlyOdd">
           <li
             class="list-group-item"
-            *ngFor="let element of filterOdds()">
+            *ngFor="let element of filterOdds()"
+            appBetterHighlight>
             {{ element }}
           </li>
         </div>
