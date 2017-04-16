@@ -7,11 +7,14 @@
 <div class="row">
   <div class="col-xs-12">
     <ul class="list-group">
-      <app-recipe-item 
+      <a href="#"
+        class="list-group-item clearfix"
+        app-recipe-item
         *ngFor="let recipeItem of recipes"
         [recipe]="recipeItem"
-        (click)="recipeSelected(recipeItem)">
-      </app-recipe-item>
+        (click)="recipeSelected(recipeItem)"
+        >
+      </a>
     </ul>
   </div>
 </div>
