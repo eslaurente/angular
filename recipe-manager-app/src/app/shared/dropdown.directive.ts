@@ -13,10 +13,10 @@ export class DropdownDirective {
     this.toggleOpen();
   }
 
-  @HostListener('focusout')
-  onFoucsout() {
-    this.toggleOpen();
-  }
+  // @HostListener('mouseleave')
+  // onFoucsout() {
+  //   this.toggleOpen();
+  // }
 
   private toggleOpen() {
     this.isOpen = !this.isOpen;

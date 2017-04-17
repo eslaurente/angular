@@ -17,15 +17,7 @@ export class ShoppingListService {
   }
   
   addIngredient(anIngredient: Ingredient) {
-    const ingredientFromList = this.getFromList(anIngredient);
-    if (ingredientFromList) {
-      // Already exists: add to amount
-      ingredientFromList.amount += anIngredient.amount; 
-    }
-    else {
-      // Does not exist, add to list
-      this.ingredients.push(anIngredient);
-    }
+    this._addIngredient(anIngredient);
     this.listChanged.emit(this.ingredients.slice());
   }
 
@@ -39,6 +31,26 @@ export class ShoppingListService {
     else {
       // Remove from the list if it exists
       this.removeFromList(anIngredient);
+    }
+  }
+
+  addAll(ingredients: Ingredient[]) {
+    ingredients.forEach((ingredient: Ingredient) => {
+      this._addIngredient(ingredient.clone());
+    });
+    
+    this.listChanged.emit(this.ingredients.slice());
+  }
+
+  private _addIngredient(anIngredient: Ingredient) {
+    const ingredientFromList = this.getFromList(anIngredient);
+    if (ingredientFromList) {
+      // Already exists: add to amount
+      ingredientFromList.amount += anIngredient.amount; 
+    }
+    else {
+      // Does not exist, add to list
+      this.ingredients.push(anIngredient);
     }
   }
 
