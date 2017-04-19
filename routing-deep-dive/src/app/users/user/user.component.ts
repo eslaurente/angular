@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Params } from "@angular/router";
 
 @Component({
   selector: 'app-user',
@@ -7,15 +7,26 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  user: {id: number, name: string};
+  user: {id: number, name: string} = { id: 0,  name: ''};
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.route);
-    this.user = {
-      id: this.route.snapshot.params['id'],
-      name: this.route.snapshot.params['name']
-    }
+    // this.user = {
+    //   id: this.route.snapshot.params['id'],
+    //   name: this.route.snapshot.params['name']
+    // };
+    this.route.params.subscribe((params: Params) => {
+      if (this.user) {
+        this.user.id = params['id'];
+        this.user.name = params['name'];
+      }
+      else {
+        this.user = {
+          id: this.route.snapshot.params['id'],
+          name: this.route.snapshot.params['name']
+        }
+      }
+    });
   }
 }
