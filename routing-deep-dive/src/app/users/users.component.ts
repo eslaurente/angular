@@ -25,10 +25,4 @@ export class UsersComponent {
   constructor(private router: Router, private route: ActivatedRoute) {
 
   }
-
-  ngAfterViewInit() {
-    console.log(this.router);
-    console.log(this.route);
-    
-  }
 }
