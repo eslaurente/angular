@@ -13,8 +13,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  onLoadServersPage() {
-    this.router.navigate(['servers']).then((result: Boolean) => {
+  onLoadServersPage(id: number) {
+    const extras = {
+      queryParams: { allowEdit: '1' },
+      fragment: 'loading'
+    }
+    this.router.navigate(['/servers', id, 'edit'], extras).then((result: Boolean) => {
       console.log(`Successfully navigated to 'Servers' page: ${result}`);
     });
   }
