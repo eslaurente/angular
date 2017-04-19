@@ -4,7 +4,8 @@
       <a
         href="#"
         class="list-group-item"
-        *ngFor="let user of users">
+        *ngFor="let user of users"
+        [routerLink]="['/users', user.id, user.name]">
         {{ user.name }}
       </a>
     </div>
