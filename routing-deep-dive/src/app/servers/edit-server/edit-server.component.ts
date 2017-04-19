@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Params } from "@angular/router";
 
 @Component({
   selector: 'app-edit-server',
@@ -12,18 +12,28 @@ export class EditServerComponent implements OnInit {
   server: {id: number, name: string, status: string};
   serverName = '';
   serverStatus = '';
+  allowEdit = false;
 
   constructor(private route: ActivatedRoute, private serversService: ServersService) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot.queryParamMap);
-    console.log(this.route.snapshot.fragment);
-    // For reactive programming, Observables:
-    // this.route.queryParamMap.subscribe();
-    // this.route.fragment.subscribe();
-    this.server = this.serversService.getServer(1);
+    this.server = this.serversService.getServer(Number(this.route.snapshot.params['id']));
     this.serverName = this.server.name;
     this.serverStatus = this.server.status;
+    console.log(this.route);
+    
+    // For reactive programming, Observables:
+    this.route.queryParamMap.subscribe((paramsMap: Params) => {
+      console.log(paramsMap);
+      
+      this.allowEdit = paramsMap['allowEdit'];
+    });
+    this.route.params.subscribe((params: Params) => {
+      this.server = this.serversService.getServer(Number(params['id']));
+      this.serverName = this.server.name;
+      this.serverStatus = this.server.status;
+    });
+    // this.route.fragment.subscribe();
   }
 
   onUpdateServer() {

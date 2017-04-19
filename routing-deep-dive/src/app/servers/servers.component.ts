@@ -10,7 +10,9 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class ServersComponent implements OnInit {
   private servers: {id: number, name: string, status: string}[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private serversService: ServersService) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private serversService: ServersService) { }
 
   ngOnInit() {
     this.servers = this.serversService.getServers();
