@@ -1,4 +1,4 @@
-<div *ngIf="allowEdit; else editNotAllowed">
+<div *ngIf="allowEdit === true; else editNotAllowed">
   <div class="form-group">
     <label for="name">Server Name</label>
     <input
