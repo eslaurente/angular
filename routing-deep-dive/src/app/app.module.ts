@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AuthService } from "app/auth.service";
 import { AuthGuard } from "app/auth-guard.service";
 import { CanDeactivateGuard } from "app/servers/edit-server/can-deactivate-guard.service";
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CanDeactivateGuard } from "app/servers/edit-server/can-deactivate-guard
     UserComponent,
     EditServerComponent,
     ServerComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
