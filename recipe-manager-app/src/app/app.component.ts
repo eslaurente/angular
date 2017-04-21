@@ -6,10 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Recipe Manager App';
-  currentPage: string = 'recipes';
-
-  onPageSelected(pageSelected: string) {
-    this.currentPage = pageSelected;
-  }
 }
