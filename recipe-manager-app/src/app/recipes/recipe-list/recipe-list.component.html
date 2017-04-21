@@ -12,7 +12,8 @@
         app-recipe-item
         *ngFor="let recipeItem of recipes"
         [recipe]="recipeItem"
-        [routerLink]="[recipeItem.id]">
+        [routerLink]="[recipeItem.id]"
+        routerLinkActive="list-group-item-info">
       </a>
     </ul>
   </div>

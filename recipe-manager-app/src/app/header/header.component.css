@@ -1,6 +1,11 @@
 a {
     cursor: pointer;
 }
+
 nav a.active {
-    color: white;
+    color: #5cb85c;
+}
+
+nav a:hover {
+    color: lightgreen;
 }
