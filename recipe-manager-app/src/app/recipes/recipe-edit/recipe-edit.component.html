@@ -1,3 +1,7 @@
 <p>
   recipe-edit works!
+  New Mode: {{ newMode }}
 </p>
+<div *ngIf="!newMode">
+  <p>Name: {{ recipe.name }}</p>
+</div>

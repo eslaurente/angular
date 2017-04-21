@@ -34,7 +34,8 @@ const routes: Route[] = [
       },
       {
         path: ':id/edit',
-        component: RecipeEditComponent
+        component: RecipeEditComponent,
+        resolve: { recipe: RecipeItemResolver }
       }
     ]
   },
