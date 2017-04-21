@@ -31,6 +31,10 @@ const routes: Route[] = [
         path: ':id',
         component: RecipeDetailComponent,
         resolve: { recipe: RecipeItemResolver }
+      },
+      {
+        path: ':id/edit',
+        component: RecipeEditComponent
       }
     ]
   },
