@@ -7,7 +7,11 @@ import { ShoppingListService } from "app/services/shopping-list.service";
 @Injectable()
 export class RecipeService {
   private recipes: Recipe[] = [
-      new Recipe('Pork Guisantes', 'Pork Guisantes is a hearty stew made with pork, green peas, and bell peppers cooked in a tomato sauce. Hearty and delicious, it’s best served with steamed rice.', 'http://www.kawalingpinoy.com/wp-content/uploads/2016/01/pork-guisantes-1.jpg',
+      new Recipe(
+        '1',
+        'Pork Guisantes',
+        'Pork Guisantes is a hearty stew made with pork, green peas, and bell peppers cooked in a tomato sauce. Hearty and delicious, it’s best served with steamed rice.',
+        'http://www.kawalingpinoy.com/wp-content/uploads/2016/01/pork-guisantes-1.jpg',
         new RecipeDetails(
           [new Ingredient('Olive oil', 1, 'tbsp'),
            new Ingredient('Red bell pepper', 1.5, 'pcs'),
@@ -23,8 +27,14 @@ export class RecipeService {
           ['In a pan over medium heat, heat oil. Add bell peppers and cook for about 30 to 40 seconds. Remove from pan and set aside.',
           'In the pan, add onions and garlic and cook until softened. Add pork and cook for about 4 to 5 minutes or until lightly browned. Add fish and sauce and cook for about 1 to 2 minutes.',
           'Add tomato sauce, water, and bay leaf. Bring to a boil. Lower heat, cover and continue to cook for about 20 to 30 minutes or until pork is fork-tender and sauce is reduced.',
-          'Add sweet peas and cook for about 2 to 3 minutes or until heated through. Season with salt and pepper to taste. Add bell peppers and cook for another 1 to 2 minutes or until tender yet crisp. Serve hot.'])),
-      new Recipe('Chicken and Pork Adobo', 'Adobo has many regional variations and chicken and pork adobo is just one of the common interpretations of our quintessential Filipino stew.', 'http://www.kawalingpinoy.com/wp-content/uploads/2014/09/chickenadobo-a.jpg',
+          'Add sweet peas and cook for about 2 to 3 minutes or until heated through. Season with salt and pepper to taste. Add bell peppers and cook for another 1 to 2 minutes or until tender yet crisp. Serve hot.']
+        )
+      ),
+      new Recipe(
+        '2',
+        'Chicken and Pork Adobo',
+        'Adobo has many regional variations and chicken and pork adobo is just one of the common interpretations of our quintessential Filipino stew.',
+        'http://www.kawalingpinoy.com/wp-content/uploads/2014/09/chickenadobo-a.jpg',
         new RecipeDetails(
           [new Ingredient('Olive oil', 1, 'tbsp'),
            new Ingredient('Onion', 1, 'pcs'),
@@ -37,7 +47,9 @@ export class RecipeService {
            new Ingredient('Bay leaves', 2, 'pcs')
           ],
           ['In a pot over medium heat, heat oil. Add onions and garlic and cook until limp. Add pork and cook, stirring occasionally, until lightly browned. Add chicken and cook, stirring occasionally, until lightly browned and juices run clear.',
-          'Add vinegar and bring to a boil, uncovered and without stirring, for about 3 to 5 minutes. Add soy sauce, water and bay leaves. Continue to boil for about 2 to 3 minutes. Lower heat, cover and continue to cook until meat is tender and sauce is reduced. Season with salt and pepper to taste. Serve hot.']))
+          'Add vinegar and bring to a boil, uncovered and without stirring, for about 3 to 5 minutes. Add soy sauce, water and bay leaves. Continue to boil for about 2 to 3 minutes. Lower heat, cover and continue to cook until meat is tender and sauce is reduced. Season with salt and pepper to taste. Serve hot.']
+        )
+      )
     ];
   recipeSelected: EventEmitter<Recipe> = new EventEmitter<Recipe>();
   
@@ -45,6 +57,17 @@ export class RecipeService {
 
   getRecipes(): Recipe[] {
     return this.recipes.slice();
+  }
+
+  getRecipeById(id: string): Recipe | undefined {
+    let recipe;
+    let length = this.recipes.length;
+    for (let i = 0; i < length; i++) {
+      recipe = this.recipes[i];
+      if (recipe.id === id) {
+        return recipe;
+      }
+    }
   }
   
   addToShoppingList(ingredients: Ingredient[]) {
