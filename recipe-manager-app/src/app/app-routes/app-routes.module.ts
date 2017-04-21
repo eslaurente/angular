@@ -24,13 +24,13 @@ const routes: Route[] = [
         component: RecipeStartComponent
       },
       {
+        path: 'new',
+        component: RecipeEditComponent
+      },
+      {
         path: ':id',
         component: RecipeDetailComponent,
         resolve: { recipe: RecipeItemResolver }
-      },
-      {
-        path: 'new',
-        component: RecipeEditComponent
       }
     ]
   },
