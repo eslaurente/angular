@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { NgForm } from "@angular/forms";
+import { NgForm, NgModelGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -7,11 +7,15 @@ import { NgForm } from "@angular/forms";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
   @ViewChild('aForm') aForm: NgForm;
+  @ViewChild('userData') userDataGroup: NgModelGroup;
+  defaultQuestion = 'teacher';
+  answer = '';
 
   ngOnInit(): void {
     console.log(this.aForm);
+    console.log(this.userDataGroup);
+    
   }
 
   suggestUserName() {
