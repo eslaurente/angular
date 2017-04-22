@@ -17,7 +17,6 @@
           <span class="help-block validation"
             *ngIf="!username.valid && username.touched">Please enter a username
           </span>
-          <button class="btn btn-default" type="button">Suggest an Username</button>
           <div class="form-group">
             <label for="email">Mail</label>
             <input id="email"
@@ -33,13 +32,13 @@
           </span>
         </div>
         <div ngModelGroup="secretQuestion"
-          *ngIf="userData.valid">
+          *ngIf="showAll || userData.valid">
           <div class="form-group">
-            <label for="secret">Secret Questions</label>
-            <select id="secret"
+            <label for="question">Secret Questions</label>
+            <select id="question"
               class="form-control"
               [ngModel]="defaultQuestion"
-              name="secret">
+              name="question">
               <option value="pet">Your first Pet?</option>
               <option value="teacher">Your first teacher?</option>
             </select>
@@ -62,10 +61,16 @@
               required>{{ gender }}
           </label>
         </div>
-        <button class="btn btn-primary"
-          type="submit"
-          [disabled]="!aForm.valid">Submit
-        </button>
+        <div>
+          <button class="btn btn-default"
+            type="button"
+            (click)="autoFill()">Autofill Form
+          </button>
+          <button class="btn btn-primary"
+            type="submit"
+            [disabled]="!aForm.valid">Submit
+          </button>
+        </div>
       </form>
     </div>
   </div>

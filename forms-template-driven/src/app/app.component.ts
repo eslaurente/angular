@@ -9,17 +9,35 @@ import { NgForm, NgModelGroup } from "@angular/forms";
 export class AppComponent implements OnInit {
   @ViewChild('aForm') aForm: NgForm;
   @ViewChild('userData') userDataGroup: NgModelGroup;
+  showAll = false;
   defaultQuestion = 'teacher';
   answer = '';
+  genders = ['Male', 'Female'];
 
   ngOnInit(): void {
     console.log(this.aForm);
     console.log(this.userDataGroup);
-    
   }
 
-  suggestUserName() {
-    const suggestedName = 'Superuser';
+  autoFill() {
+    const suggestedName = 'eslaurente';
+    this.showAll = true;
+    setTimeout(() => {
+      this.aForm.setValue({
+        userData: {
+          username: suggestedName,
+          email: 'e.s.laurente@gmail.com'
+        },
+        secretQuestion: {
+          question: 'pet',
+          answer: 'Mocha'
+        },
+        gender: 'Male'
+      });
+      
+      // NOTE:
+      // Can use this.aForm.form.patchValue() to selectively change only some of the fields 
+    });
   }
 
   // onSubmit(form: NgForm) {
