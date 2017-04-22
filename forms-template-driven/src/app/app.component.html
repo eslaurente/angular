@@ -18,7 +18,7 @@
             *ngIf="!username.valid && username.touched">Please enter a username
           </span>
           <div class="form-group">
-            <label for="email">Mail</label>
+            <label for="email">Email</label>
             <input id="email"
               class="form-control"
               ngModel
@@ -72,6 +72,18 @@
           </button>
         </div>
       </form>
+    </div>
+  </div>
+  <hr>
+  <div class="row"
+    *ngIf="submitted">
+    <div class="col-xs-12">
+      <h4>Your Data</h4>
+      <p>Username: {{ user.username }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Secret Question: {{ user.question }}</p>
+      <p>Secrete Answer: {{ user.answer }}</p>
+      <p>Gender: {{ user.gender }}</p>
     </div>
   </div>
 </div>

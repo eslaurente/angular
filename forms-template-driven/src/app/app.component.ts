@@ -10,9 +10,17 @@ export class AppComponent implements OnInit {
   @ViewChild('aForm') aForm: NgForm;
   @ViewChild('userData') userDataGroup: NgModelGroup;
   showAll = false;
+  submitted = false;
   defaultQuestion = 'teacher';
   answer = '';
   genders = ['Male', 'Female'];
+  user = {
+    username: '',
+    email: '',
+    question: '',
+    answer: '',
+    gender: ''
+  };
 
   ngOnInit(): void {
     console.log(this.aForm);
@@ -45,6 +53,11 @@ export class AppComponent implements OnInit {
   // }
 
   onSubmit() {
-    console.log(this.aForm);
+    this.user.username = this.aForm.controls.userData.value.username;
+    this.user.email = this.aForm.controls.userData.value.email;
+    this.user.question = this.aForm.controls.secretQuestion.value.question;
+    this.user.answer = this.aForm.controls.secretQuestion.value.answer;
+    this.user.gender = this.aForm.value.gender;
+    this.submitted = true;
   }
 }
