@@ -1,5 +1,6 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Ingredient } from "app/shared/ingredient.model";
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class ShoppingListService {
@@ -7,8 +8,8 @@ export class ShoppingListService {
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10)
   ];
-  public ingredientSelected = new EventEmitter<Ingredient>();
-  public listChanged = new EventEmitter<Ingredient[]>();
+  public ingredientSelected = new Subject<Ingredient>();
+  public listChanged = new Subject<Ingredient[]>();
 
   constructor() { }
 
@@ -18,7 +19,7 @@ export class ShoppingListService {
   
   addIngredient(anIngredient: Ingredient) {
     this._addIngredient(anIngredient);
-    this.listChanged.emit(this.ingredients.slice());
+    this.listChanged.next(this.ingredients.slice());
   }
 
   removeIngredient(anIngredient: Ingredient) {
@@ -26,7 +27,7 @@ export class ShoppingListService {
     if (ingredientFromList && (ingredientFromList.amount - anIngredient.amount) > 0) {
       // Already exists: add to amount
       ingredientFromList.amount -= anIngredient.amount;
-      this.listChanged.emit(this.ingredients.slice());
+      this.listChanged.next(this.ingredients.slice());
     }
     else {
       // Remove from the list if it exists
@@ -39,7 +40,7 @@ export class ShoppingListService {
       this._addIngredient(ingredient.clone());
     });
     
-    this.listChanged.emit(this.ingredients.slice());
+    this.listChanged.next(this.ingredients.slice());
   }
 
   private _addIngredient(anIngredient: Ingredient) {
@@ -81,7 +82,7 @@ export class ShoppingListService {
     if (index < this.ingredients.length) {
       // If index is within array range, remove element at 'index' from the list
       this.ingredients.splice(index, 1);      
-      this.listChanged.emit(this.ingredients.slice());
+      this.listChanged.next(this.ingredients.slice());
     }
   }
 }

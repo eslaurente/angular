@@ -1,23 +1,29 @@
-import { Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Ingredient } from "app/shared/ingredient.model";
 import { ShoppingListService } from "app/services/shopping-list.service";
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css']
 })
-export class ShoppingEditComponent implements OnInit {
+export class ShoppingEditComponent implements OnInit, OnDestroy {
+  private ingredientSelectedSubcrptn: Subscription;
   @ViewChild('nameInput') nameInput : ElementRef;
   @ViewChild('amountInput') amountInput: ElementRef;
 
   constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
-    this.shoppingListService.ingredientSelected.subscribe((ingredient: Ingredient) => {
+    this.ingredientSelectedSubcrptn = this.shoppingListService.ingredientSelected.subscribe((ingredient: Ingredient) => {
       this.nameInput.nativeElement.value = ingredient.name;
       this.amountInput.nativeElement.value = ingredient.amount;
     });
+  }
+
+  ngOnDestroy() {
+    this.ingredientSelectedSubcrptn.unsubscribe();
   }
 
   added() {
