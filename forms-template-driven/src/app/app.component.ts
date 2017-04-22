@@ -59,5 +59,7 @@ export class AppComponent implements OnInit {
     this.user.answer = this.aForm.controls.secretQuestion.value.answer;
     this.user.gender = this.aForm.value.gender;
     this.submitted = true;
+
+    this.aForm.reset();
   }
 }
