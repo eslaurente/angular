@@ -31,9 +31,9 @@ export class AppComponent implements OnInit {
       'hobbies': new FormArray([])
     });
     this.username = <FormControl>this.getControl('userData.username');
-    this.email =    <FormControl>this.getControl('userData.email');
-    this.gender =   <FormControl>this.getControl('gender');
-    this.hobbies =  <FormArray>this.getControl('hobbies');    
+    this.email    = <FormControl>this.getControl('userData.email');
+    this.gender   = <FormControl>this.getControl('gender');
+    this.hobbies  = <FormArray>this.getControl('hobbies');    
   }
 
   onSubmit() {

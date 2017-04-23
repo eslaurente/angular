@@ -12,7 +12,9 @@
               class="form-control"
               formControlName="username">
             <span class="help-block validation"
-              *ngIf="username.invalid && username.touched">Please enter a username
+              *ngIf="username.invalid && username.touched">
+              <div *ngIf="username.errors['required']">Please enter a username</div>
+              <div *ngIf="username.errors['forbiddenUsername']">That name is forbidden</div>
             </span>
           </div>
           <div class="form-group">
