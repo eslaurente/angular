@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from "@angular/forms";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'app-root',
@@ -14,15 +15,27 @@ export class AppComponent implements OnInit {
   gender: FormControl;
   hobbies: FormArray;
   forbiddenUsernames = ['Chris', 'Anna'];
+  errorsMsgs = {
+    username: {
+      required: 'Username is required',
+      forbiddenUsername: 'That username is forbidden'
+    },
+    email: {
+      required: 'Email is required',
+      email: 'That email is not the proper format',
+      forbiddenEmail: 'That email is forbidden'
+    }
+  };
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
       'userData': new FormGroup({
         'username': new FormControl(null,
-          [Validators.required, this._forbiddenUsernames.bind(this)] 
+          [Validators.required, this.forbiddenUsername.bind(this)] 
         ),
         'email': new FormControl(null,
-          [Validators.required, Validators.email]
+          [Validators.required, Validators.email],
+          [this.forbiddenEmail.bind(this)]
         )
       }),
       'gender': new FormControl(null,
@@ -45,16 +58,39 @@ export class AppComponent implements OnInit {
     this.hobbies.push(control);
   }
 
+  getErrorMessage(control: FormControl, name: string): string {
+    if (control.errors['required']) {
+      return this.errorsMsgs[name].required;
+    }
+    for (let prop in control.errors) {
+      return this.errorsMsgs[name][prop];
+    }
+  }
+
   private getControl(name: string): AbstractControl {
     return this.signupForm.get(name);
   }
 
-  _forbiddenUsernames(control: FormControl): { [s: string]: boolean } {
+  private forbiddenUsername(control: FormControl): { [s: string]: boolean } {
     if (this.forbiddenUsernames.indexOf(control.value) > -1) {
       return {
         'forbiddenUsername': true
       }
     }
     return null;
+  }
+
+  private forbiddenEmail(control: FormControl): Promise<{ [s: string]: boolean }> | Observable<{ [s: string]: boolean }> {
+    const promise = new Promise<{ [s: string]: boolean }>((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === 'test@test.com') {
+          resolve({ 'forbiddenEmail': true });
+        }
+        else {
+          resolve(null);
+        }
+      }, 1500)
+    });
+    return promise;
   }
 }
