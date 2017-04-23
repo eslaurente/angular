@@ -17,7 +17,7 @@
             </span>
           </div>
         </div>
-        <div class="col-sm-2 form-group"
+        <div class="col-sm-3 form-group"
           [ngClass]="{ 'has-error': amount.invalid && amount.touched }">
           <label for="amount">Amount</label>
           <input type="number"
@@ -40,7 +40,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="btn-group">
-            <button class="btn btn-success" type="submit" (click)="onAdded()">Add</button>
+            <button class="btn btn-success" type="submit" (click)="onAdded()">{{ updateMode ? 'Update' : 'Add' }}</button>
             <button class="btn btn-danger" type="button" (click)="onRemoved()">Delete</button>
             <button class="btn btn-primary" type="button" (click)="onCleared()">Clear</button>
           </div>

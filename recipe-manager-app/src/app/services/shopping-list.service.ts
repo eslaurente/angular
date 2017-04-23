@@ -43,6 +43,40 @@ export class ShoppingListService {
     this.listChanged.next(this.ingredients.slice());
   }
 
+  getByIndex(index: number): Ingredient | undefined {
+    return this.ingredients[index];
+  }
+
+  updateValues(name: string, values: { name?: string, amount?: number }): void {
+    const ingredient: Ingredient = this.getByName(name);
+    if (ingredient) {
+      if (values.name) {
+        ingredient.name = values.name;
+      }
+      if (values.amount) {
+        ingredient.amount = values.amount;
+      }
+    }
+  }
+
+  getByName(name: string): Ingredient | undefined {
+    for (let item of this.ingredients) {
+      if (item.name.toLowerCase() === name.toLowerCase()) {
+        return item;
+      }
+    }
+    return undefined;
+  }
+
+  existsByReference(ingredient: Ingredient): boolean {
+    for (let item of this.ingredients) {
+      if (item === ingredient) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   private _addIngredient(anIngredient: Ingredient) {
     const ingredientFromList = this.getFromList(anIngredient);
     if (ingredientFromList) {

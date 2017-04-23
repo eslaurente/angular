@@ -12,16 +12,29 @@ import { NgForm } from "@angular/forms";
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   private ingredientSelectedSubcrptn: Subscription;
   @ViewChild('form') form: NgForm;
+  updateMode = false;
+  ingredientToUpdate: Ingredient = undefined;
 
 
   constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
-    this.ingredientSelectedSubcrptn = this.shoppingListService.ingredientSelected.subscribe((ingredient: Ingredient) => {
-      this.form.setValue({
-        'name': ingredient.name,
-        'amount': ingredient.amount
-      });
+    this.ingredientSelectedSubcrptn = this.shoppingListService.ingredientSelected.subscribe((ingredient: Ingredient | undefined) => {
+      if (ingredient) {
+        this.form.setValue({
+          'name': ingredient.name,
+          'amount': ingredient.amount
+        });
+        this.updateMode = true;
+        this.ingredientToUpdate = ingredient;
+      }
+      else {
+        // ingredient === undefined
+        // Change this.updateMode => false;
+        this.form.reset();
+        this.updateMode = false;
+        this.ingredientToUpdate = undefined;
+      }
     });
   }
 
@@ -39,7 +52,15 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       const amount: string = this.form.value.amount;
       if (this.isValid(nameTemp, amount)) {
         const name: string = nameTemp.charAt(0).toUpperCase() + nameTemp.substring(1);
-        this.shoppingListService.addIngredient(new Ingredient(name, Number(amount)));
+        if (this.updateMode) {
+          this.shoppingListService.updateValues(this.ingredientToUpdate.name, {
+            name: name,
+            amount: Number(amount)
+          });
+        }
+        else {
+          this.shoppingListService.addIngredient(new Ingredient(name, Number(amount)));
+        }
       }
     }
   }
@@ -53,7 +74,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onCleared() {
-    this.form.reset();
+    this.shoppingListService.ingredientSelected.next(undefined);
   }
 
   private isValid(name: string, amount: string): boolean {

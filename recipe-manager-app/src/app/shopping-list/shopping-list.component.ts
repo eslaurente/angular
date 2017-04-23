@@ -11,13 +11,25 @@ import { Subscription } from "rxjs/Subscription";
 export class ShoppingListComponent implements OnInit, OnDestroy {
   private listChangedSubscrptn: Subscription;
   ingredients: Ingredient[];
+  currentlySelected: Ingredient;
 
   constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
     this.ingredients = this.shoppingListService.getShoppingList();
+    // listChanged Observable
     this.listChangedSubscrptn = this.shoppingListService.listChanged.subscribe((ingredients: Ingredient[]) => {
       this.ingredients = ingredients;
+      if (!this.shoppingListService.existsByReference(this.currentlySelected)) {        
+        this.clearSelectedIngredient();
+      }
+    });
+
+    // ingredientSelected Observable
+    this.shoppingListService.ingredientSelected.subscribe((ingredient: Ingredient | undefined) => {
+      if (!ingredient) {
+        this.currentlySelected = undefined;
+      }
     });
   }
 
@@ -26,6 +38,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   setSelectedIngredient(ingredient: Ingredient) {
+    this.currentlySelected = ingredient;
     this.shoppingListService.ingredientSelected.next(ingredient);
+  }
+
+  private clearSelectedIngredient(): void {
+    this.shoppingListService.ingredientSelected.next(undefined);
   }
 }

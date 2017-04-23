@@ -3,6 +3,7 @@
   <hr>
   <ul class="list-group">
     <a class="list-group-item"
+      [ngClass]="{ 'list-group-item-info': currentlySelected === ingredient }"
       style="cursor: pointer"
       *ngFor="let ingredient of ingredients"
       (click)="setSelectedIngredient(ingredient)">
