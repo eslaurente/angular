@@ -26,6 +26,8 @@ export class AppComponent implements OnInit {
       forbiddenEmail: 'That email is forbidden'
     }
   };
+  isSubmitted = false;
+  user: any = {};
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
@@ -46,11 +48,44 @@ export class AppComponent implements OnInit {
     this.username = <FormControl>this.getControl('userData.username');
     this.email    = <FormControl>this.getControl('userData.email');
     this.gender   = <FormControl>this.getControl('gender');
-    this.hobbies  = <FormArray>this.getControl('hobbies');    
+    this.hobbies  = <FormArray>this.getControl('hobbies');
+
+    // Subscribe to value changes
+    this.signupForm.valueChanges.subscribe((value) => {
+      console.log(value);
+    });
+
+    // Subscribe to form status changes
+    this.signupForm.statusChanges.subscribe((value) => {
+      console.log(value);
+    });
+
+    // Set entire form values
+    this.signupForm.setValue({
+      'userData': {
+        'username': 'Emerald',
+        'email': 'e.s.laurente@gmail.com'
+      },
+      'gender': 'Male',
+      'hobbies': []
+    });
+
+    // Set partial form values
+    this.signupForm.patchValue({
+      'userData': {
+        'username': 'Emerald',
+        'email': 'e.s.laurente@gmail.com'
+      }
+    });
   }
 
   onSubmit() {
     console.log(this.signupForm);
+    this.user.name = this.signupForm.value.userData.username;
+    this.user.email = this.signupForm.value.userData.email;
+    this.user.gender = this.signupForm.value.gender;
+    this.isSubmitted = true;
+    this.signupForm.reset();
   }
 
   onAddHobby() {

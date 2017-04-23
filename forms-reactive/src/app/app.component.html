@@ -60,5 +60,12 @@
         </button>
       </form>
     </div>
+    <div *ngIf="isSubmitted"
+      class="col-xs-12">
+      <hr>
+      <code>{{ user.name }}</code><br>
+      <code>{{ user.email }}</code><br>
+      <code>{{ user.gender }}</code><br>
+    </div>
   </div>
 </div>
