@@ -16,18 +16,20 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      'username': new FormControl(null,
-        [Validators.required]
-      ),
-      'email': new FormControl(null,
-        [Validators.required, Validators.email]
-      ),
-      'gender': new FormControl('Male',
+      'userData': new FormGroup({
+        'username': new FormControl(null,
+          [Validators.required] 
+        ),
+        'email': new FormControl(null,
+          [Validators.required, Validators.email]
+        )
+      }),
+      'gender': new FormControl(null,
         [Validators.required]
       )
     });
-    this.username = this.getControl('username');
-    this.email = this.getControl('email');
+    this.username = this.getControl('userData.username');
+    this.email = this.getControl('userData.email');
     this.gender = this.getControl('gender');
   }
 
