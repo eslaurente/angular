@@ -53,12 +53,15 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       if (this.isValid(nameTemp, amount)) {
         const name: string = nameTemp.charAt(0).toUpperCase() + nameTemp.substring(1);
         if (this.updateMode) {
+          // Update selected recipe
           this.shoppingListService.updateValues(this.ingredientToUpdate.name, {
             name: name,
             amount: Number(amount)
           });
+          this.shoppingListService.ingredientSelected.next(undefined);
         }
         else {
+          // Add to recipe list
           this.shoppingListService.addIngredient(new Ingredient(name, Number(amount)));
         }
       }
