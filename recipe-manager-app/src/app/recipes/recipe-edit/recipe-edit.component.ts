@@ -13,6 +13,7 @@ import { Ingredient } from "app/shared/ingredient.model";
 export class RecipeEditComponent implements OnInit {
   recipe: Recipe;
   recipeForm: FormGroup;
+  recipeFormArray: FormArray;
   newMode = false;
 
   constructor(private activatedRoute: ActivatedRoute) { }
@@ -39,6 +40,16 @@ export class RecipeEditComponent implements OnInit {
     console.log(this.recipeForm);
   }
 
+  onAddIngredient() {
+    this.recipeFormArray.push(
+      new FormGroup({
+        'name':   new FormControl(),
+        'amount': new FormControl(),
+        'unit':   new FormControl()
+      })
+    );
+  }
+
   private initForm() {
     this.recipeForm = new FormGroup({
       'name': new FormControl(
@@ -54,6 +65,8 @@ export class RecipeEditComponent implements OnInit {
         this.newMode ? [] : this.getIngredientsFormGroup(this.recipe.details.ingredients)
       )
     });
+
+    this.recipeFormArray = <FormArray>this.recipeForm.get('ingredients');
   }
 
   private getIngredientsFormGroup(ingredients: Ingredient[]): FormGroup[] {
