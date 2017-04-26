@@ -3,6 +3,7 @@ import { Recipe } from "app/shared/recipe.model";
 import { RecipeDetails } from "app/shared/recipe-details.model";
 import { Ingredient } from "app/shared/ingredient.model";
 import { ShoppingListService } from "app/services/shopping-list.service";
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class RecipeService {
@@ -51,6 +52,7 @@ export class RecipeService {
         '2'
       )
     ];
+  recipeListChanged = new Subject<Recipe[]>();
       
   constructor(private shoppingListService: ShoppingListService) { }
 
@@ -88,15 +90,15 @@ export class RecipeService {
   addRecipe(recipe: Recipe) {
     recipe.id = this.getRandomIntInclusive(0, 9999).toString();
     this.recipes.push(recipe);
+    this.recipeListChanged.next(this.recipes.slice());
   }
 
   updateRecipe(id: string, recipe: Recipe) {
     const index = this.getRecipeIndexById(id);
     const targetRecipe = this.recipes[index];
     recipe.id = targetRecipe.id;
-    console.log(targetRecipe, recipe);
-    
     this.recipes[index] = recipe;
+    this.recipeListChanged.next(this.recipes.slice());
   }
 
   private getRandomIntInclusive(min, max): number {
