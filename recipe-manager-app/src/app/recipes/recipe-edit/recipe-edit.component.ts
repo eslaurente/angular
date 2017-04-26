@@ -4,6 +4,8 @@ import { FormGroup, FormControl, FormArray, Validators, ValidatorFn } from "@ang
 
 import { Recipe } from "app/shared/recipe.model";
 import { Ingredient } from "app/shared/ingredient.model";
+import { RecipeService } from "app/services/recipe.service";
+import { RecipeDetails } from "app/shared/recipe-details.model";
 
 @Component({
   selector: 'app-recipe-edit',
@@ -13,10 +15,12 @@ import { Ingredient } from "app/shared/ingredient.model";
 export class RecipeEditComponent implements OnInit {
   recipe: Recipe;
   recipeForm: FormGroup;
-  recipeFormArray: FormArray;
+  ingredientFormArray: FormArray;
+  instructionsFormArray: FormArray;
   newMode = false;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private recipeService: RecipeService) { }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data: { recipe: Recipe }) => {
@@ -37,11 +41,18 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.recipeForm);
+    if (this.newMode) {
+      // new recipe
+      this.recipeService.addRecipe(this.getRecipeObject());
+    }
+    else {
+      // update recipe
+      this.recipeService.updateRecipe(this.recipe.id, this.getRecipeObject());
+    }
   }
 
   onAddIngredient() {
-    this.recipeFormArray.push(
+    this.ingredientFormArray.push(
       new FormGroup({
         'name':   new FormControl(null, this.getIngredientNameValidators()),
         'amount': new FormControl(null, this.getIngredientAmountValidators()),
@@ -50,9 +61,49 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
+  onAddInstruction() {
+    this.instructionsFormArray.push(
+      new FormGroup({
+        'instructionText':   new FormControl(null, Validators.required)
+      })
+    );
+  }
+
   isInvalid(formName: string): boolean {
     const formCtrl = this.recipeForm.get(formName);
     return formCtrl.invalid && formCtrl.touched;
+  }
+
+  private getRecipeObject(): Recipe {
+    return new Recipe(
+      this.recipeForm.value['name'],
+      this.recipeForm.value['description'],
+      this.recipeForm.value['imagePath'],
+      new RecipeDetails(
+        this.getIngredientsArray(this.recipeForm.value['ingredients']),
+        this.getInstructionsArray(this.recipeForm.value['instructions'])
+      ),
+    );
+  }
+
+  private getIngredientsArray(formArray: any[]): Ingredient[] {
+    const ingredientList = [];
+      formArray.forEach((form) => {
+        ingredientList.push(new Ingredient(
+          form['name'],
+          Number(form['amount']),
+          form['unit']
+        ));
+      });
+    return ingredientList;
+  }
+
+  private getInstructionsArray(formArray: any[]): string[] {
+    const instructionList = [];
+      formArray.forEach((form) => {
+        instructionList.push(form['instructionText']);
+      });
+    return instructionList;
   }
 
   private initForm() {
@@ -71,10 +122,14 @@ export class RecipeEditComponent implements OnInit {
       ),
       'ingredients': new FormArray(
         this.newMode ? [] : this.getIngredientsFormGroup(this.recipe.details.ingredients),
+      ),
+      'instructions': new FormArray(
+        this.newMode ? [] : this.getInstructionsFormGroup(this.recipe.details.instructions),
       )
     });
 
-    this.recipeFormArray = <FormArray>this.recipeForm.get('ingredients');
+    this.ingredientFormArray = <FormArray>this.recipeForm.get('ingredients');
+    this.instructionsFormArray = <FormArray>this.recipeForm.get('instructions');
   }
 
   private getIngredientsFormGroup(ingredients: Ingredient[]): FormGroup[] {
@@ -85,6 +140,16 @@ export class RecipeEditComponent implements OnInit {
         'amount': new FormControl(ingredient.amount, this.getIngredientAmountValidators()),
         'unit':   new FormControl(ingredient.unit, this.getUnitValidators())
       }));
+    });
+    return formArray;
+  }
+
+  private getInstructionsFormGroup(instructions: string[]): FormGroup[] {
+    const formArray: FormGroup[] = [];
+    instructions.forEach((instruction) => {      
+      formArray.push(new FormGroup({
+        'instructionText': new FormControl(instruction, Validators.required)
+      }))
     });
     return formArray;
   }

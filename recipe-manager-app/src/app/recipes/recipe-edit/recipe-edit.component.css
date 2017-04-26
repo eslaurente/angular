@@ -1,0 +1,9 @@
+.ingredients.scroll {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.instructions.scroll {
+    max-height: 200px;
+    overflow-y: auto;
+}
