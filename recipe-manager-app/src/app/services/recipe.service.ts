@@ -87,10 +87,19 @@ export class RecipeService {
     this.shoppingListService.addAll(ingredients);
   }
 
-  addRecipe(recipe: Recipe) {
+  addRecipe(recipe: Recipe): string {
     recipe.id = this.getRandomIntInclusive(0, 9999).toString();
     this.recipes.push(recipe);
     this.recipeListChanged.next(this.recipes.slice());
+    return recipe.id;
+  }
+
+  removeRecipe(id: string) {
+    const index = this.getRecipeIndexById(id);
+    if (index !== undefined) {
+      this.recipes.splice(index, 1);
+      this.recipeListChanged.next(this.recipes.slice());
+    }
   }
 
   updateRecipe(id: string, recipe: Recipe) {
