@@ -83,6 +83,14 @@ export class RecipeEditComponent implements OnInit {
     }
   }
 
+  onDeleteIngredient(index: number) {
+    this.ingredientFormArray.removeAt(index);
+  }
+
+  onDeleteInstruction(index: number) {
+    this.instructionsFormArray.removeAt(index);
+  }
+
   isInvalid(formName: string): boolean {
     const formCtrl = this.recipeForm.get(formName);
     return formCtrl.invalid && formCtrl.touched;
