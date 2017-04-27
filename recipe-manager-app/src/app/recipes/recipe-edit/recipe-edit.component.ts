@@ -75,7 +75,12 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/recipes']);
+    if (this.recipe) {
+      this.router.navigate(['/recipes', this.recipe.id]);
+    }
+    else {
+      this.router.navigate(['/recipes']);
+    }
   }
 
   isInvalid(formName: string): boolean {
