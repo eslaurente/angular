@@ -42,6 +42,9 @@ export class AppComponent {
   onGet() {
     this.serverService.getServers().subscribe(
       (servers: any[]) => {
+        servers.forEach((server: any) => {
+          server.name = (<string>server.name).replace('FETCHED_FROM:_', '');
+        });
         this.servers = servers;
       },
       (error: any) => console.error(error)

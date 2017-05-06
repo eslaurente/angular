@@ -27,6 +27,9 @@ export class ServerService {
           server.name = `FETCHED_FROM:_${server.name}`;
         }
         return data; // map() will wrap 'data' in a new Observable
+      })
+      .catch((error: Response) => {
+        return Observable.throw('SOMETHING WENT WRONG');
       });
   }
 }
