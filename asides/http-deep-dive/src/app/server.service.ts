@@ -23,6 +23,9 @@ export class ServerService {
     return this.http.get('https://udemy-ng-http-3e84d.firebaseio.com/data.json')
       .map((response: Response) => {
         const data: any[] = response.json();
+        for (const server of data) {
+          server.name = `FETCHED_FROM:_${server.name}`;
+        }
         return data; // map() will wrap 'data' in a new Observable
       });
   }
