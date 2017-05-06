@@ -34,10 +34,18 @@ export class AppComponent {
 
   onSave() {
     this.serverService.storeServers(this.servers).subscribe((response: Response) => {
-      console.log(response);
+      console.log('onSave()', response.json());
     }, (error: any) => {
       console.error(error);
       
+    });
+  }
+
+  onGet() {
+    this.serverService.getServers().subscribe((response: Response) => {
+      console.log('onGet()', response.json());
+    }, (error: any) => {
+      console.error(error);
     });
   }
 

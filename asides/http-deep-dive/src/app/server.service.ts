@@ -8,10 +8,10 @@ export class ServerService {
   constructor(private http: Http) { }
 
   storeServers(servers: any[]): Observable<Response> {
-    const headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    return this.http.post('https://udemy-ng-http-3e84d.firebaseio.com/.json', servers, { headers: headers });
+    return this.http.post('https://udemy-ng-http-3e84d.firebaseio.com/data.json', servers);
   }
 
+  getServers(): Observable<Response> {
+    return this.http.get('https://udemy-ng-http-3e84d.firebaseio.com/data.json');
+  }
 }
