@@ -33,20 +33,18 @@ export class AppComponent {
   }
 
   onSave() {
-    this.serverService.storeServers(this.servers).subscribe((response: Response) => {
-      console.log('onSave()', response.json());
-    }, (error: any) => {
-      console.error(error);
-      
-    });
+    this.serverService.storeServers(this.servers).subscribe(
+      (servers: any[]) => console.log('onSave()', servers),
+      (error: any) => console.error(error)
+    );
   }
 
   onGet() {
-    this.serverService.getServers().subscribe((response: Response) => {
-      console.log('onGet()', response.json());
-    }, (error: any) => {
-      console.error(error);
-    });
+    this.serverService.getServers().subscribe(
+      (servers: any[]) => console.log('onGet()', servers),
+      (error: any) => console.error(error)
+    );
+      
   }
 
   private generateId() {
