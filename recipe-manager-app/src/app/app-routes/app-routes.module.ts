@@ -8,6 +8,7 @@ import { RecipeDetailComponent } from "app/recipes/recipe-detail/recipe-detail.c
 import { RecipeEditComponent } from "app/recipes/recipe-edit/recipe-edit.component";
 import { RecipeItemResolver } from "app/services/recipe-item-resolver.service";
 import { SignupComponent } from "app/auth/signup/signup.component";
+import { SigninComponent } from "app/auth/signin/signin.component";
 
 
 const routes: Route[] = [
@@ -47,6 +48,10 @@ const routes: Route[] = [
   {
     path: 'signup',
     component: SignupComponent
+  },
+  {
+    path: 'signin',
+    component: SigninComponent
   }
 ];
 
