@@ -23,7 +23,6 @@ import { ShoppingListModule } from "app/shopping-list/shopping-list.module";
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpModule,
     SharedModule,
     AuthModule,
