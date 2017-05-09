@@ -11,27 +11,25 @@ import { RecipeService } from "app/services/recipe.service";
 import { ShoppingListService } from "app/services/shopping-list.service";
 import { AppRoutesModule } from "app/app-routes/app-routes.module";
 import { DataStorageService } from "app/services/data-storage.service";
-import { SignupComponent } from './auth/signup/signup.component';
-import { SigninComponent } from './auth/signin/signin.component';
 import { AuthService } from "app/services/auth.service";
 import { AuthGuardService } from "app/services/auth-guard.service";
 import { RecipesModule } from "app/recipes/recipes.module";
 import { SharedModule } from "app/shared/shared.module";
+import { AuthModule } from "app/auth/auth.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ShoppingListComponent,
-    ShoppingEditComponent,
-    SignupComponent,
-    SigninComponent
+    ShoppingEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     SharedModule,
+    AuthModule,
     AppRoutesModule,
     RecipesModule
   ],

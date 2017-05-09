@@ -14,14 +14,6 @@ const routes: Route[] = [
   {
     path: 'shopping-list',
     component: ShoppingListComponent
-  },
-  {
-    path: 'signup',
-    component: SignupComponent
-  },
-  {
-    path: 'signin',
-    component: SigninComponent
   }
 ];
 
