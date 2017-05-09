@@ -11,8 +11,8 @@
     <ul class="list-group">
       <a
         class="list-group-item clearfix"
-        app-recipe-item
         *ngFor="let recipeItem of recipes"
+        app-recipe-item
         [recipe]="recipeItem"
         [routerLink]="[recipeItem.id]"
         routerLinkActive="list-group-item-info">
