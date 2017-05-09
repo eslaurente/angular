@@ -9,6 +9,7 @@ export class AuthService {
   signupUser(email: string, password: string): Promise<any> {
     return (<Promise<any>> firebase.auth().createUserWithEmailAndPassword(email, password)
       .catch((error: any) => {
+        this.token = '';
         return firebase.Promise.reject(error);
       }));
   }
@@ -21,6 +22,7 @@ export class AuthService {
         });
       })
       .catch((error: any) => {
+        this.token = '';
         return firebase.Promise.reject(error);
       }));
   }
@@ -29,7 +31,15 @@ export class AuthService {
     (<Promise<string>> firebase.auth().currentUser.getToken().then((token: string) => {
         this.token = token;
         return this.token;
+      })
+      .catch((error: any) => {
+        this.token = '';
+        return firebase.Promise.reject(error);
       }));
     return this.token;
+  }
+
+  isAuthenticated() {
+    return this.token !== '';
   }
 }
