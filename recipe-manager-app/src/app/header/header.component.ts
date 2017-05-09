@@ -1,3 +1,5 @@
+import { Router } from "@angular/router";
+
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Response } from '@angular/http';
 import { DataStorageService } from "app/services/data-storage.service";
@@ -12,7 +14,8 @@ import { AuthService } from "app/services/auth.service";
 })
 export class HeaderComponent implements OnInit {
   
-  constructor(private dataStorageService: DataStorageService,
+  constructor(private router: Router,
+              private dataStorageService: DataStorageService,
               private recipeService: RecipeService,
               private authService: AuthService) { }
 
@@ -37,6 +40,8 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authService.logout().then(() => {
       console.log('onLogout(): SUCCESS');
+      this.recipeService.setRecipeList([]);
+      this.router.navigate(['/recipes'])
     });
   }
 }

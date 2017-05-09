@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { AuthService } from "app/services/auth.service";
 import { Router } from "@angular/router";
+import { DataStorageService } from "app/services/data-storage.service";
+import { RecipeService } from "app/services/recipe.service";
+import { Recipe } from "app/shared/recipe.model";
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +14,9 @@ import { Router } from "@angular/router";
 export class SignupComponent implements OnInit {
 
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private dataStorageService: DataStorageService,
+              private recipeService: RecipeService) { }
 
   ngOnInit() {
   }
@@ -22,7 +27,14 @@ export class SignupComponent implements OnInit {
     this.authService.signupUser(email, password)
       .then((res: any) => {
         console.log('onSignup() SUCCESS', res);
-        this.router.navigate(['/']);
+        return this.authService.signinUser(email, password)
+      }).then(() => {
+        return this.router.navigate(['/']);
+      }).then(() => {
+        this.dataStorageService.fetchRecipes().subscribe((recipes: Recipe[]) => {
+          console.log('onFetchData: SUCCESS', recipes);
+          this.recipeService.setRecipeList(recipes);
+        });
       });
   }
 }

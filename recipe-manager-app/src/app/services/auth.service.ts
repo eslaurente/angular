@@ -9,7 +9,6 @@ export class AuthService {
   signupUser(email: string, password: string): Promise<any> {
     return (<Promise<any>> firebase.auth().createUserWithEmailAndPassword(email, password)
       .catch((error: any) => {
-        this.clearToken();
         return firebase.Promise.reject(error);
       }));
   }

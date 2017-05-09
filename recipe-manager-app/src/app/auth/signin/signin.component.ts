@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { AuthService } from "app/services/auth.service";
 import { Router } from "@angular/router";
+import { DataStorageService } from "app/services/data-storage.service";
+import { Recipe } from "app/shared/recipe.model";
+import { RecipeService } from "app/services/recipe.service";
 
 @Component({
   selector: 'app-signin',
@@ -11,7 +14,9 @@ import { Router } from "@angular/router";
 export class SigninComponent implements OnInit {
 
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private dataStorageService: DataStorageService,
+              private recipeService: RecipeService) { }
 
   ngOnInit() {
   }
@@ -21,7 +26,12 @@ export class SigninComponent implements OnInit {
     const password = form.value.password;
     this.authService.signinUser(email, password).then((res: any) => {
       console.log('onSignin(): SUCCESS', res);
-      this.router.navigate(['/'])
+      return this.router.navigate(['/'])
+    }).then(() => {
+      this.dataStorageService.fetchRecipes().subscribe((recipes: Recipe[]) => {
+        console.log('onFetchData: SUCCESS', recipes);
+        this.recipeService.setRecipeList(recipes);
+      });
     });
   }
 }
