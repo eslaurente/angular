@@ -31,14 +31,7 @@ export class DataStorageService {
         const data: Recipe[] =  (<Recipe[]>response.json());
         const recipeList: Recipe[] = [];
         data.forEach((item) => {
-          let details: RecipeDetails;
-          if (!item.details) {
-            details = new RecipeDetails();
-          }
-          else {
-            details = new RecipeDetails(item.details.ingredients, item.details.instructions); 
-          }
-          recipeList.push(new Recipe(item.name, item.description, item.imagePath, details, item.id));
+          recipeList.push(new Recipe(item.name, item.description, item.imagePath, item.details, item.id));
         });
         console.log(recipeList);
         

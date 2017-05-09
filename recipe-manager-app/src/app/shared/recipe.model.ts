@@ -5,5 +5,7 @@ export class Recipe {
               public description: string,
               public imagePath: string,
               public details: RecipeDetails,
-              public id?: string) {}
+              public id?: string) {
+    this.details = new RecipeDetails(details.ingredients, details.instructions);
+  }
 }
