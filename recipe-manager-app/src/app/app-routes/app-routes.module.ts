@@ -9,6 +9,7 @@ import { RecipeEditComponent } from "app/recipes/recipe-edit/recipe-edit.compone
 import { RecipeItemResolver } from "app/services/recipe-item-resolver.service";
 import { SignupComponent } from "app/auth/signup/signup.component";
 import { SigninComponent } from "app/auth/signin/signin.component";
+import { AuthGuardService } from "app/services/auth-guard.service";
 
 
 const routes: Route[] = [
@@ -27,7 +28,8 @@ const routes: Route[] = [
       },
       {
         path: 'new',
-        component: RecipeEditComponent
+        component: RecipeEditComponent,
+        canActivate: [AuthGuardService]
       },
       {
         path: ':id',
@@ -37,6 +39,7 @@ const routes: Route[] = [
       {
         path: ':id/edit',
         component: RecipeEditComponent,
+        canActivate: [AuthGuardService],
         resolve: { recipe: RecipeItemResolver }
       }
     ]
