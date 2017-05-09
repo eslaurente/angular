@@ -33,4 +33,10 @@ export class HeaderComponent implements OnInit {
         this.recipeService.setRecipeList(recipes);
       });
   }
+
+  onLogout() {
+    this.authService.logout().then(() => {
+      console.log('onLogout(): SUCCESS');
+    });
+  }
 }

@@ -9,7 +9,7 @@ export class AuthService {
   signupUser(email: string, password: string): Promise<any> {
     return (<Promise<any>> firebase.auth().createUserWithEmailAndPassword(email, password)
       .catch((error: any) => {
-        this.token = '';
+        this.clearToken();
         return firebase.Promise.reject(error);
       }));
   }
@@ -22,9 +22,19 @@ export class AuthService {
         });
       })
       .catch((error: any) => {
-        this.token = '';
+        this.clearToken();
         return firebase.Promise.reject(error);
       }));
+  }
+
+  logout(): Promise<any> {
+    return <Promise<any>> firebase.auth().signOut().then(() => {
+      this.clearToken();
+    })
+    .catch((error: any) => {
+      console.log(error);
+      this.clearToken();
+    });
   }
 
   getToken(): string {
@@ -33,7 +43,7 @@ export class AuthService {
         return this.token;
       })
       .catch((error: any) => {
-        this.token = '';
+        this.clearToken();
         return firebase.Promise.reject(error);
       }));
     return this.token;
@@ -41,5 +51,9 @@ export class AuthService {
 
   isAuthenticated() {
     return this.token !== '';
+  }
+
+  private clearToken() {
+    this.token = '';
   }
 }
