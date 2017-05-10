@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
         console.log('onSignup() SUCCESS', res);
         return this.authService.signinUser(email, password)
       }).then(() => {
-        return this.router.navigate(['/']);
+        return this.router.navigate(['/recipes']);
       }).then(() => {
         this.dataStorageService.fetchRecipes().subscribe((recipes: Recipe[]) => {
           console.log('onFetchData: SUCCESS', recipes);

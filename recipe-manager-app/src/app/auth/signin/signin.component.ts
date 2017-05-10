@@ -26,7 +26,7 @@ export class SigninComponent implements OnInit {
     const password = form.value.password;
     this.authService.signinUser(email, password).then((res: any) => {
       console.log('onSignin(): SUCCESS', res);
-      return this.router.navigate(['/'])
+      return this.router.navigate(['/recipes'])
     }).then(() => {
       this.dataStorageService.fetchRecipes().subscribe((recipes: Recipe[]) => {
         console.log('onFetchData: SUCCESS', recipes);

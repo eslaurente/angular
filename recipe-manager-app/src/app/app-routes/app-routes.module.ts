@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
+import { HomeComponent } from "app/home/home.component";
 
 const routes: Route[] = [
   {
     path: '',
-    redirectTo: 'recipes',
-    pathMatch: 'full' 
+    component: HomeComponent
   }
 ];
 
