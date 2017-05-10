@@ -6,6 +6,11 @@ nav a.active {
     color: #5cb85c;
 }
 
+nav p.navbar-text {
+    color: white;
+    font-size: 100%;
+}
+
 nav a:hover {
     color: lightgreen;
 }

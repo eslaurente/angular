@@ -1,26 +1,42 @@
 <div class="row">
   <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
     <h3>Register</h3>
-    <form #singupForm="ngForm"
-      (ngSubmit)="onSignup(singupForm)">
-      <div class="form-group">
+    <form #signupForm="ngForm"
+      (ngSubmit)="onSignup(signupForm)">
+      <div class="form-group"
+        [ngClass]="{ 'has-error': name.invalid && name.touched }">
+        <label for="name">Name</label>
+        <input type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          ngModel #name="ngModel"
+          required>
+      </div>
+      <div class="form-group"
+        [ngClass]="{ 'has-error': email.invalid && email.touched }">
         <label for="email">E-mail</label>
         <input type="email"
           class="form-control"
           id="email"
           name="email"
-          ngModel>
+          ngModel #email="ngModel"
+          required
+          email>
       </div>
-      <div class="form-group">
+      <div class="form-group"
+        [ngClass]="{ 'has-error': password.invalid && password.touched }">
         <label for="password">Password</label>
         <input type="password"
           class="form-control"
           id="password"
           name="password"
-          ngModel>
+          ngModel #password="ngModel"
+          required>
       </div>
       <button class="btn btn-primary"
-        type="submit">Sign Up
+        type="submit"
+        [disabled]="signupForm.invalid">Sign Up
       </button>
     </form>
   </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RecipeDetails } from "app/shared/recipe-details.model";
 import { Ingredient } from "app/shared/ingredient.model";
 import { ShoppingListService } from "app/services/shopping-list.service";
+import { AuthService } from "app/services/auth.service";
 
 @Component({
   selector: 'app-recipes',
@@ -10,7 +11,7 @@ import { ShoppingListService } from "app/services/shopping-list.service";
 })
 export class RecipesComponent implements OnInit {
   
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }

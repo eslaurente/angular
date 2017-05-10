@@ -3,23 +3,29 @@
     <h3>Login</h3>
     <form #signinForm="ngForm"
       (ngSubmit)="onSignin(signinForm)">
-      <div class="form-group">
+      <div class="form-group"
+        [ngClass]="{ 'has-error': email.invalid && email.touched }">
         <label for="email">E-mail</label>
         <input type="email"
           class="form-control"
           name="email"
           id="email"
-          ngModel>
+          ngModel #email="ngModel"
+          required
+          email>
       </div>
-      <div class="form-group">
+      <div class="form-group"
+        [ngClass]="{ 'has-error': password.invalid && password.touched }">
         <label for="password">Password</label>
         <input type="password"
           class="form-control"
           name="password"
           id="password"
-          ngModel>
+          ngModel #password="ngModel"
+          required>
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-primary"
+        [disabled]="signinForm.invalid">Login</button>
     </form>
   </div>
 </div>
