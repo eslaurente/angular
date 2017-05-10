@@ -18,7 +18,8 @@ import { ShoppingListService } from "app/services/shopping-list.service";
   ],
   exports: [
     AppRoutesModule,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent
   ],
   declarations: [
     HeaderComponent,

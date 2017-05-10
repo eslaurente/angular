@@ -44,4 +44,12 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/']);
     });
   }
+
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  getDisplayName(): string {
+    return this.authService.getDisplayName();
+  }
 }

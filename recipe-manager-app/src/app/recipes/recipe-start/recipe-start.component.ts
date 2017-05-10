@@ -13,4 +13,7 @@ export class RecipeStartComponent implements OnInit {
   ngOnInit() {
   }
 
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
 }

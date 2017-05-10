@@ -96,6 +96,14 @@ export class RecipeEditComponent implements OnInit {
     return formCtrl.invalid && formCtrl.touched;
   }
 
+  getIngredientsFormGroupArray(): FormGroup[] {    
+    return (<FormGroup[]>this.ingredientFormArray.controls);
+  }
+
+  getInstructionsFormGroupArray(): FormGroup[] {
+    return (<FormGroup[]>this.instructionsFormArray.controls);
+  }
+
   private getRecipeObject(): Recipe {
     return new Recipe(
       this.recipeForm.value['name'],

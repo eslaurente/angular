@@ -21,13 +21,13 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/signup']" routerLinkActive="active">Register</a></li>
-        <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/signin']" routerLinkActive="active">Login</a></li>
-        <li *ngIf="authService.isAuthenticated()"><p class="navbar-text label label-default">{{ authService.getDisplayName() }}</p></li>
-        <li *ngIf="authService.isAuthenticated()"><a (click)="onLogout()">Logout</a>
+        <li *ngIf="!isAuthenticated()"><a [routerLink]="['/signup']" routerLinkActive="active">Register</a></li>
+        <li *ngIf="!isAuthenticated()"><a [routerLink]="['/signin']" routerLinkActive="active">Login</a></li>
+        <li *ngIf="isAuthenticated()"><p class="navbar-text label label-default">{{ getDisplayName() }}</p></li>
+        <li *ngIf="isAuthenticated()"><a (click)="onLogout()">Logout</a>
         </li>
         <li class="dropdpown"
-          *ngIf="authService.isAuthenticated()"
+          *ngIf="isAuthenticated()"
           appDropdown>
           <a class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
