@@ -12,6 +12,9 @@
           name="name"
           ngModel #name="ngModel"
           required>
+          <span class="help-block"
+            *ngIf="name.invalid && name.touched && name.errors.required">Name is required
+          </span>
       </div>
       <div class="form-group"
         [ngClass]="{ 'has-error': email.invalid && email.touched }">
@@ -23,6 +26,14 @@
           ngModel #email="ngModel"
           required
           email>
+          <span class="help-block"
+            *ngIf="email.invalid && email.touched && email.errors.required; else invalidEmail">E-mail is required
+          </span>
+          <ng-template #invalidEmail>
+            <span class="help-block"
+              *ngIf="email.invalid && email.touched && email.errors.email">Use a valid e-mail format
+            </span>
+          </ng-template>
       </div>
       <div class="form-group"
         [ngClass]="{ 'has-error': password.invalid && password.touched }">
@@ -33,6 +44,9 @@
           name="password"
           ngModel #password="ngModel"
           required>
+          <span class="help-block"
+            *ngIf="password.invalid && password.touched && password.errors.required">Password is required
+          </span>
       </div>
       <button class="btn btn-primary"
         type="submit"

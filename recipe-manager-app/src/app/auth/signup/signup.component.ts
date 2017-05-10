@@ -25,6 +25,7 @@ export class SignupComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
     const displayName = form.value.name;
+    form.control.disable();
     this.authService.signupUser(email, password, displayName)
       .then((res: any) => {
         console.log('onSignup() SUCCESS', res);
@@ -36,6 +37,8 @@ export class SignupComponent implements OnInit {
           console.log('onFetchData: SUCCESS', recipes);
           this.recipeService.setRecipeList(recipes);
         });
+      }).catch(() => {
+        form.control.enable();
       });
   }
 }
