@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout().then(() => {
       console.log('onLogout(): SUCCESS');
       this.recipeService.setRecipeList([]);
-      this.router.navigate(['/recipes'])
+      this.router.navigate(['/']);
     });
   }
 }

@@ -6,11 +6,13 @@ import { FormsModule } from "@angular/forms";
 
 import { ShoppingListComponent } from "app/shopping-list/shopping-list.component";
 import { ShoppingEditComponent } from "app/shopping-list/shopping-edit/shopping-edit.component";
+import { AuthGuardService } from "app/services/auth-guard.service";
 
 const routes: Routes = [
   {
     path: 'shopping-list',
-    component: ShoppingListComponent
+    component: ShoppingListComponent,
+    canActivate: [ AuthGuardService ]
   }
 ];
 

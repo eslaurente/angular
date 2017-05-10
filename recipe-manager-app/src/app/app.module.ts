@@ -11,7 +11,6 @@ import { AppRoutesModule } from "app/app-routes/app-routes.module";
 import { DataStorageService } from "app/services/data-storage.service";
 import { AuthService } from "app/services/auth.service";
 import { AuthGuardService } from "app/services/auth-guard.service";
-import { RecipesModule } from "app/recipes/recipes.module";
 import { SharedModule } from "app/shared/shared.module";
 import { AuthModule } from "app/auth/auth.module";
 import { ShoppingListModule } from "app/shopping-list/shopping-list.module";
@@ -29,7 +28,6 @@ import { HomeModule } from "app/home/home.module";
     AppRoutesModule,
     AuthModule,
     HomeModule,
-    RecipesModule,
     ShoppingListModule
   ],
   providers: [

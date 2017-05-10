@@ -6,6 +6,10 @@ const routes: Route[] = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'recipes',
+    loadChildren: '../recipes/recipes.module#RecipesModule'
   }
 ];
 

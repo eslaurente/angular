@@ -5,6 +5,7 @@ import { FormsModule } from "@angular/forms";
 
 import { SignupComponent } from "app/auth/signup/signup.component";
 import { SigninComponent } from "app/auth/signin/signin.component";
+import { ErrorLoginComponent } from './error-login/error-login.component';
 
 const routes: Routes = [
   {
@@ -14,13 +15,18 @@ const routes: Routes = [
   {
     path: 'signin',
     component: SigninComponent
+  },
+  {
+    path: 'error-login',
+    component: ErrorLoginComponent
   }
 ];
     
 @NgModule({
   declarations: [
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    ErrorLoginComponent
   ],
   imports: [
     CommonModule,
