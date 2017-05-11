@@ -9,28 +9,40 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         'background-color': 'red',
         'transform': 'translateX(0px)'
       })),
-      state('highlight', style({
+      state('highlighted', style({
         'background-color': 'blue',
         'transform': 'translateX(100px)'
       })),
-      transition('normal <=> highlight', animate(300))
+      transition('normal <=> highlighted', animate(300))
     ]),
     trigger('wildState', [
       state('normal', style({
         'background-color': 'red',
-        'transform': 'translateX(0px) scale(1)'
+        'transform': 'translateX(0) scale(1)',
+        'border-radius': '0px'
+
       })),
-      state('highlight', style({
+      state('highlighted', style({
         'background-color': 'blue',
-        'transform': 'translateX(100px) scale(1)'
+        'transform': 'translateX(100px) scale(1)',
+        'border-radius': '0px'
       })),
       state('shrunken', style({
         'background-color': 'green',
-        'transform': 'translateX(0px) scale(0.5)'
+        'transform': 'translateX(0) scale(0.5)',
+        'border-radius': '0px'
       })),
-      transition('normal => highlight', animate(300)),
-      transition('highlight => normal', animate(800)),
-      transition('shrunken <=> *', animate(1000))
+      transition('normal => highlighted', animate(300)),
+      transition('highlighted => normal', animate(800)),
+      transition('shrunken <=> *', [
+        style({
+          'background-color': 'orange'
+        }),
+        animate(1000, style({
+          'border-radius': '50px'
+        })),
+        animate(500)
+      ])
     ])
   ]
 })
@@ -40,12 +52,12 @@ export class AppComponent {
   list = ['Milk', 'Sugar', 'Bread'];
 
   onAnimate() {
-    this.state === 'normal' ? this.state = 'highlight' : this.state = 'normal';
-    this.wildState === 'normal' ? this.wildState = 'highlight' : this.wildState = 'normal';
+    this.state === 'normal' ? this.state = 'highlighted' : this.state = 'normal';
+    this.wildState === 'normal' ? this.wildState = 'highlighted' : this.wildState = 'normal';
   }
 
   onShrink() {
-    this.wildState === 'normal' ? this.wildState = 'shrunken' : this.wildState = 'normal';
+    this.wildState = 'shrunken';
   }
 
   onAdd(item: string) {
